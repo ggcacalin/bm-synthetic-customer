@@ -1,0 +1,8 @@
+# Ignore all .log files
+*.log
+
+# Ignore all .tmp files
+*.tmp
+
+# Ignore any .env file
+.env
