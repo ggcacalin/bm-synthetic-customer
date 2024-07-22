@@ -12,11 +12,10 @@ jq == 1.7.0
 pymssql == 2.3.0
 rapidocr-onnxruntime == 1.3.23
 
-#Vector database - replace with faiss-cpu if no CUDA 12.1 available
-#faiss-gpu == 1.7.2
+#Vector database
 faiss-cpu == 1.8.0.post1
 
 #Deployment related
 pandas
-flask
 python-dotenv
+psutil
