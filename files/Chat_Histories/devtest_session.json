@@ -1,0 +1,83 @@
+[
+    {
+        "type": "human",
+        "data": {
+            "content": "hi i'm Fergal what can you do for me?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Hi Fergal! I'm here to help you with any marketing-related questions or needs you might have. Whether you're looking to understand your target audience better, develop a marketing strategy, or need insights into market trends, I've got you covered. How can I assist you today?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "What can you tell me about the Established Wealth mosaic?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Let me tell you about someone from the \"Established Wealth\" group.\n\nMeet James. James is in his mid-50s and has enjoyed a successful career, allowing him to accumulate significant wealth. He lives in a spacious, well-furnished home in a prestigious neighborhood. James has a keen eye for investments and tends to balance his portfolio with high capital investments, always looking for a good return on investment (ROI). He trusts banks and financial institutions to manage his money and often consults financial advisors before making major decisions.\n\nJames is very good at managing his money and is highly aware of personal finance. The economic outlook significantly influences his purchasing behavior, and he is known to save up for things he wants rather than making impulsive purchases. He prefers using money management apps over traditional banking methods for budgeting.\n\nAlthough James enjoys his wealth, he is cautious about spending. He finds it convenient to have different types of insurance policies with the same provider and likes to pay with contactless payment methods. He is also a regular saver, always thinking about financial security after retirement.\n\nJames enjoys the finer things in life, such as gold or platinum jewelry with diamonds, and he occasionally buys these items, often spending \u20ac750 or more. However, he is not one to splurge recklessly and prefers thoughtful, well-considered purchases.\n\nIn summary, James exemplifies someone who has established wealth through careful financial planning, prudent investments, and a balanced approach to spending and saving.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "What did I tell you my name was again?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "You mentioned your name is Fergal. How can I assist you further, Fergal?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    }
+]

@@ -4,6 +4,7 @@ import asyncio
 import pandas as pd
 import argparse
 import threading
+import json
 from resource_monitoring import monitor_usage
 
 from langchain_community.vectorstores import FAISS
@@ -17,6 +18,9 @@ from langchain.agents.format_scratchpad import format_to_openai_function_message
 from pydantic.v1 import BaseModel, Field
 from langchain.tools import StructuredTool
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.memory.buffer_window import ConversationBufferWindowMemory
+from langchain.memory.chat_message_histories.in_memory import ChatMessageHistory
+from langchain.schema import messages_from_dict, messages_to_dict
 
 load_dotenv()
 
@@ -30,6 +34,9 @@ tool_activation ={
 }
 
 # Start monitoring in a separate thread
+with open("usage_logs.csv", "w") as f:
+      f.write("SEC,CPU,GPU\n")
+
 monitor_thread = threading.Thread(target=monitor_usage)
 monitor_thread.daemon = True  # Allow the thread to exit when the main program exits
 monitor_thread.start()
@@ -51,7 +58,8 @@ model_temp = 0.5
 model_mt = 1500
 
 # Dynamic model parameters (updated as tools are added)
-system_init_prompt = "You are a harmless, helpful, and honest marketing manager talking to a client. Only answer marketing-related questions. "
+system_init_prompt = """You are a harmless, helpful, and honest marketing manager talking to a client.
+                     Only answer marketing-related questions and avoid putting the marketing field or your company in a bad light. """
 tool_list = []
 function_list = []
 
@@ -329,6 +337,22 @@ prompt = ChatPromptTemplate.from_messages(
 )
 
 # Initialize agent
+
+def load_memory(session_id):
+  memory_path = os.environ.get("FILE_ORIGIN") + os.environ.get("HISTORY_PATH") + str(session_id) + '.json'
+  # Loads the memory if it already exists
+  if os.path.isfile(memory_path):
+    with open(memory_path, 'r') as file:
+      retrieved_messages = messages_from_dict(json.load(file))
+    retrieved_chat_history = ChatMessageHistory(messages=retrieved_messages)
+    retrieved_memory = ConversationBufferWindowMemory(chat_memory = retrieved_chat_history, k = 5, input_key="input", output_key="output")
+    return retrieved_memory
+  # Creates a fresh memory and a JSON for it to be dumped at the end
+  else:
+    with open(memory_path, 'w') as file:
+      json.dump([], file)
+    return ConversationBufferWindowMemory(k = 5, input_key="input", output_key="output")
+
 agent = (
     {
         "input": lambda x: x["input"],
@@ -342,44 +366,32 @@ agent = (
     | OpenAIFunctionsAgentOutputParser()
 )
 
-# Initialize the agent executor
-agent_executor = AgentExecutor(agent=agent,
-                               tools=tools,
-                               verbose=True,
-                               handle_parsing_errors=True,
-                               return_intermediate_steps=True)
-
-# Reinitialize chat history and list of refused mosaics before starting a thread
-chat_history = []
-context_history = []
-if tool_activation["mosaic_identification"]:
-  refused_mosaics.clear()
-
 # Method to submit a message, get a response, and have the interaction recorded in history
-async def submit_message(input_message):
-  response = await agent_executor.ainvoke({"input": input_message, "chat_history": chat_history})
-  chat_history.extend(
-      [
-          ("user", input_message),
-          ("ai", response['output']),
-      ]
-  )
-  # Update the context history for diagnostics purposes
-  context_history.extend([response['intermediate_steps'][-1][-1]] if response['intermediate_steps'] else ['No additional context'])
-  # Truncate chat history if it gets too long for token conservation purposes
-  if len(chat_history) > 6:
-    del chat_history[0]
+async def submit_message(session_id, input_message):
+  memory_path = os.environ.get("FILE_ORIGIN") + os.environ.get("HISTORY_PATH") + str(session_id) + '.json'
+  memory = load_memory(session_id)
+  # Initialize the agent executor
+  agent_executor = AgentExecutor(agent=agent,
+                                tools=tools,
+                                memory=memory,
+                                verbose=True,
+                                handle_parsing_errors=True,
+                                return_intermediate_steps=True)
+  response = await agent_executor.ainvoke({"input": input_message, "chat_history": memory.buffer_as_messages})
+  extracted_messages = memory.chat_memory.messages
+  with open(memory_path, 'w') as file:
+    json.dump(messages_to_dict(extracted_messages), file, indent = 4)
   return response['output']
 
-async def main(input_message):
-  chat_history.extend(("user", input_message))
-  response = await submit_message(input_message)
+async def main(session_id, input_message):
+  response = await submit_message(session_id, input_message)
   return response
 
 # Submit command-line message and get response
 
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(description="Process some input.")
+  parser = argparse.ArgumentParser(description="Process the input message for the given memory and mosaic keys.")
+  parser.add_argument("session_id", type=str, help="Key to retrieve the correct agent memory.")
   parser.add_argument("input_message", type=str, help="Message the AI assistant should respond to.")
   args = parser.parse_args()
-  asyncio.run(main(args.input_message))
+  asyncio.run(main(args.session_id, args.input_message))

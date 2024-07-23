@@ -1,5 +1,6 @@
 import psutil
 import time
+from datetime import datetime
 
 def get_cpu_memory_usage():
     process = psutil.Process()
@@ -9,9 +10,9 @@ def get_cpu_memory_usage():
     return cpu_usage, memory_usage
 
 def monitor_usage():
-    with open("usage_logs.csv", "w") as f:
-      f.write("SEC,CPU,GPU\n")
     runtime = 0
+    with open("usage_logs.csv", "a") as f:
+          f.write(datetime.now(), "\n")
     while True:
         cpu, memory = get_cpu_memory_usage()
         with open("usage_logs.csv", "a") as f:
