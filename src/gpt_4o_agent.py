@@ -227,7 +227,8 @@ if tool_activation["tgi_nuggets"]:
     tool_list.append(nuggets_get_questions_tool)
     system_init_prompt += """If the client asks for demographic insights or information nuggets, use your nuggets_get_questions tool with the mosaic name being discussed.
                           The numbers represent popularity scores for the response, not numbers of individuals.
-                          Create a succint bullet point list of demographic features that score the highest in the mosaic, such as age, gender, ethnicity, occupation, and marital status of the average individual in the mosaic.
+                          Create a succint enumeration of demographic features that score the highest in the mosaic, such as age, gender, ethnicity, occupation, and marital status of the average individual in the mosaic.
+                          You must not use special characters and you are not allowed to make a bullet point list, write everything in one paragraph.
                           You may infer information on the demographics from what data you have if you can't find what you need in the questions.
                           """
     function_list.append(nuggets_get_questions_function)
