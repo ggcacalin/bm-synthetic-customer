@@ -34,8 +34,9 @@ tool_activation ={
 }
 
 # Start monitoring in a separate thread
-with open("usage_logs.csv", "w") as f:
-      f.write("SEC,CPU,GPU\n")
+if not os.path.exists("usage_logs.csv"):
+  with open("usage_logs.csv", "w") as f:
+        f.write("SEC,CPU,GPU\n")
 
 monitor_thread = threading.Thread(target=monitor_usage)
 monitor_thread.daemon = True  # Allow the thread to exit when the main program exits
