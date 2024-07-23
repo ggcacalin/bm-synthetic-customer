@@ -30,12 +30,14 @@ tool_activation ={
   "title_recommendation": False,
   "tgi_summarization": True,
   "tgi_interrogation": True,
+  "tgi_nuggets": True,
   "ipa_retrieval": False
 }
 
 # Start monitoring in a separate thread
-with open("usage_logs.csv", "w") as f:
-      f.write("SEC,CPU,GPU\n")
+if not os.path.exists("usage_logs.csv"):
+  with open("usage_logs.csv", "w") as f:
+        f.write("SEC,CPU,GPU\n")
 
 monitor_thread = threading.Thread(target=monitor_usage)
 monitor_thread.daemon = True  # Allow the thread to exit when the main program exits
@@ -180,6 +182,56 @@ if tool_activation["title_recommendation"]:
                           """
     function_list.append(get_title_scores_function)
 
+# TGI question-based NUGGET GENERATION self-contained tool
+if tool_activation["tgi_nuggets"]:
+  def nuggets_get_questions(mosaic_name: str) -> str:
+    questions_to_return = ""
+    question_db = FAISS.load_local(tgi_serialization_path + mosaic_name, OpenAIEmbeddings(), allow_dangerous_deserialization = True)
+    question_retriever = question_db.as_retriever(search_kwargs = {'k': 10})
+    # Gather most fitting questions for mosaic name and user keywords
+    question_list = question_retriever.invoke("Demographics, age, sex, gender, race, ethnicity, nationality, occupation, sector, married, status")
+    for question in question_list:
+      questions_to_return += question.page_content
+      questions_to_return += "\n\n"
+    return questions_to_return
+  
+  # BaseModel to help assistant know when to call the function
+  class NuggetQuestions(BaseModel):
+    mosaic_name: str = Field(..., description = "Name of target audience mosaic to find question names and scores for")
+
+  # OpenAI function based on the method, loaded directly into the LLM
+  nuggets_get_questions_function = {
+      "name": "nuggets_get_questions",
+      "description": "Get the questions of the mosaic discussed that relate to demographics.",
+      "parameters": {
+          "type": "object",
+          "properties": {
+              "mosaic_name": {
+                  "type": "string",
+                  "description": "Name of target audience mosaic to find question names and scores for"
+              }
+          },
+          "required": ["mosaic_name"]
+      }
+  }
+
+  # LangChain tool based on the method, loaded into the overarching agent
+  nuggets_get_questions_tool = StructuredTool.from_function(
+      func = nuggets_get_questions,
+      args_schema = NuggetQuestions,
+      description = "Get the questions of the mosaic discussed that relate to demographics."
+  )
+
+  # Updating the lists of functions and tools and instructing assistant on function use in the prompt
+  if nuggets_get_questions_tool not in tool_list:
+    tool_list.append(nuggets_get_questions_tool)
+    system_init_prompt += """If the client asks for demographic insights or information nuggets, use your nuggets_get_questions tool with the mosaic name being discussed.
+                          The numbers represent popularity scores for the response, not numbers of individuals.
+                          Create a succint bullet point list of demographic features that score the highest in the mosaic, such as age, gender, ethnicity, occupation, and marital status of the average individual in the mosaic.
+                          You may infer information on the demographics from what data you have if you can't find what you need in the questions.
+                          """
+    function_list.append(nuggets_get_questions_function)
+
 # TGI question-based mosaic SUMMARIZATION self-contained tool
 if tool_activation["tgi_summarization"]:
   def summarization_get_questions(mosaic_name: str, previous_keywords: str) -> str:
@@ -314,6 +366,7 @@ if tool_activation["ipa_retrieval"]:
 
   if ipa_retriever_function not in function_list:
     function_list.append(ipa_retriever_function)
+
 
 # Initialize LLM
 tools = tool_list

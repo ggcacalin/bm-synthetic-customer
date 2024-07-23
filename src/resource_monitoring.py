@@ -12,7 +12,7 @@ def get_cpu_memory_usage():
 def monitor_usage():
     runtime = 0
     with open("usage_logs.csv", "a") as f:
-          f.write(datetime.now(), "\n")
+          f.write(str(datetime.now()) + "\n")
     while True:
         cpu, memory = get_cpu_memory_usage()
         with open("usage_logs.csv", "a") as f:

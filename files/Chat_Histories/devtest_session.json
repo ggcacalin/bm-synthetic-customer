@@ -79,5 +79,86 @@
             "invalid_tool_calls": [],
             "usage_metadata": null
         }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "can you give me quick demographic insights into the Established Wealth mosaic",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Sure, here are some quick demographic insights into the \"Established Wealth\" mosaic:\n\n- **Marital Status**: Predominantly single.\n- **Gender**: Mostly men.\n- **Lifestage**: Primarily empty nesters.\n- **Spouse/Partner Working Status**: Many are retired.\n- **Children**: Few have children aged 5-24 years.\n- **Ethnicity**: Predominantly White - Irish.\n- **Occupation**: Many hold positions as directors, senior officials, senior managers, or in administrative/clerical roles.\n\nThese insights can help tailor your marketing strategies to better reach this audience. How would you like to proceed?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "tell me if this target audience eats cheese and what kind",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Yes, the \"Established Wealth\" target audience does enjoy eating cheese. Here are some specifics:\n\n- **Popular Cheese Varieties**: \n  - Irish Cheddar\n  - Edam\n  - Mozzarella\n  - Parmesan\n  - Feta\n\n- **Types of Cheese**:\n  - Slices\n  - Cheese Spread\n  - Cottage Cheese\n  - Mini Cheeses in Packs/Nets\n\n- **Cheese Consumption Frequency**:\n  - Many consume cheese in blocks or grated form once a day or more.\n  - A significant portion are medium users, consuming cheese 2 or 3 times a week.\n\nThis audience appreciates a variety of cheeses and tends to incorporate them regularly into their diet.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "tell me if this target audience buys chewing gum and what kind",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Yes, the \"Established Wealth\" target audience does buy chewing gum, although they are generally light users or may not consume it frequently. Here are some specifics:\n\n- **Frequency of Use**:\n  - Many are light users, consuming gum once a week or less.\n  - A significant portion never buys chewing gum.\n  - Some consume it once a day or more, but this is less common.\n\n- **Type of Gum**:\n  - Sugar-free gum is preferred.\n\n- **Popular Brands**:\n  - Silvermints\n  - Tic Tac\n  - Polo Mints\n  - Airwaves\n  - XXX Extra Strong\n  - Smint\n\nThis audience tends to prefer sugar-free options and favors specific brands like Silvermints and Tic Tac.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
     }
 ]
