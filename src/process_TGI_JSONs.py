@@ -36,6 +36,8 @@ def main():
 
     # Mosaic name
     mosaic_name = json_dict['results']['title']
+    mosaic_name = mosaic_name.lower()
+    mosaic_name = mosaic_name.replace(" ", "_")
 
     if tgi_serialization_path + mosaic_name not in os.listdir(tgi_serialization_path):
       print(raw_json + " ... " + str(count + 1) + "/" + str(len(os.listdir(tgi_input_json_path))) + " | " + mosaic_name)

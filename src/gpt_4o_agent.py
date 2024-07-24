@@ -376,22 +376,7 @@ llm_with_tools = llm.bind(
     functions = function_list
 )
 
-# Initialize the user prompt
-user_init_prompt = """
-{}
-"""
-
-prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", system_init_prompt),
-        MessagesPlaceholder(variable_name="chat_history"),
-        ("user", user_init_prompt.format("{input}")),
-        MessagesPlaceholder(variable_name="agent_scratchpad"),
-    ],
-)
-
-# Initialize agent
-
+# Method for loading existing memory or creating a new memory file
 def load_memory(session_id):
   memory_path = os.environ.get("FILE_ORIGIN") + os.environ.get("HISTORY_PATH") + str(session_id) + '.json'
   # Loads the memory if it already exists
@@ -407,24 +392,39 @@ def load_memory(session_id):
       json.dump([], file)
     return ConversationBufferWindowMemory(k = 5, input_key="input", output_key="output")
 
-agent = (
-    {
-        "input": lambda x: x["input"],
-        "agent_scratchpad": lambda x: format_to_openai_function_messages(
-            x["intermediate_steps"]
-        ),
-        "chat_history": lambda x: x["chat_history"],
-    }
-    | prompt
-    | llm_with_tools
-    | OpenAIFunctionsAgentOutputParser()
-)
-
 # Method to submit a message, get a response, and have the interaction recorded in history
-async def submit_message(session_id, input_message):
+async def submit_message(session_id, mosaic_id, input_message):
+  # Deal with memory
   memory_path = os.environ.get("FILE_ORIGIN") + os.environ.get("HISTORY_PATH") + str(session_id) + '.json'
   memory = load_memory(session_id)
-  # Initialize the agent executor
+
+  # Create definitive prompt
+  user_init_prompt = "Please help me explore the following target mosaic: " + mosaic_id + "\n"
+  user_init_prompt += "Here is what I want: {}"
+
+  prompt = ChatPromptTemplate.from_messages(
+      [
+          ("system", system_init_prompt),
+          MessagesPlaceholder(variable_name="chat_history"),
+          ("user", user_init_prompt.format("{input}")),
+          MessagesPlaceholder(variable_name="agent_scratchpad"),
+      ],
+  )
+
+  # Initialize agent
+  agent = (
+      {
+          "input": lambda x: x["input"],
+          "agent_scratchpad": lambda x: format_to_openai_function_messages(
+              x["intermediate_steps"]
+          ),
+          "chat_history": lambda x: x["chat_history"],
+      }
+      | prompt
+      | llm_with_tools
+      | OpenAIFunctionsAgentOutputParser()
+  )
+
   agent_executor = AgentExecutor(agent=agent,
                                 tools=tools,
                                 memory=memory,
@@ -437,8 +437,8 @@ async def submit_message(session_id, input_message):
     json.dump(messages_to_dict(extracted_messages), file, indent = 4)
   return response['output']
 
-async def main(session_id, input_message):
-  response = await submit_message(session_id, input_message)
+async def main(session_id, mosaic_id, input_message):
+  response = await submit_message(session_id, mosaic_id, input_message)
   return response
 
 # Submit command-line message and get response
@@ -446,6 +446,7 @@ async def main(session_id, input_message):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Process the input message for the given memory and mosaic keys.")
   parser.add_argument("session_id", type=str, help="Key to retrieve the correct agent memory.")
+  parser.add_argument("mosaic_id", type=str, help="Key to address the correct target audience mosaic")
   parser.add_argument("input_message", type=str, help="Message the AI assistant should respond to.")
   args = parser.parse_args()
-  asyncio.run(main(args.session_id, args.input_message))
+  asyncio.run(main(args.session_id, args.mosaic_id, args.input_message))

@@ -160,5 +160,32 @@
             "invalid_tool_calls": [],
             "usage_metadata": null
         }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "give me some quick demographic insights",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "The \"Established Wealth\" mosaic primarily consists of men, often senior officials, directors, or retired professionals. They are predominantly White Irish and are usually empty nesters or senior sole decision-makers. Many are married, although a significant portion is single. Interests include food, holidays, sports, and finance.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
     }
 ]
