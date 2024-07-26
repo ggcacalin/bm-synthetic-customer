@@ -2,7 +2,7 @@
     {
         "type": "human",
         "data": {
-            "content": "hi i'm Fergal what can you do for me?",
+            "content": "what is your purpose?",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -14,7 +14,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "Hi Fergal! I'm here to help you with any marketing-related questions or needs you might have. Whether you're looking to understand your target audience better, develop a marketing strategy, or need insights into market trends, I've got you covered. How can I assist you today?",
+            "content": "My purpose is to find practical information, such as weather and traffic updates, and to consult news archives. I also enjoy watching pre-recorded programs and finding out more information about various shows and films. Balancing duty and personal enjoyment is important to me, and I tend to view both perspectives equally.",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -29,7 +29,7 @@
     {
         "type": "human",
         "data": {
-            "content": "What can you tell me about the Established Wealth mosaic?",
+            "content": "do you like cheese?",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -41,7 +41,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "Let me tell you about someone from the \"Established Wealth\" group.\n\nMeet James. James is in his mid-50s and has enjoyed a successful career, allowing him to accumulate significant wealth. He lives in a spacious, well-furnished home in a prestigious neighborhood. James has a keen eye for investments and tends to balance his portfolio with high capital investments, always looking for a good return on investment (ROI). He trusts banks and financial institutions to manage his money and often consults financial advisors before making major decisions.\n\nJames is very good at managing his money and is highly aware of personal finance. The economic outlook significantly influences his purchasing behavior, and he is known to save up for things he wants rather than making impulsive purchases. He prefers using money management apps over traditional banking methods for budgeting.\n\nAlthough James enjoys his wealth, he is cautious about spending. He finds it convenient to have different types of insurance policies with the same provider and likes to pay with contactless payment methods. He is also a regular saver, always thinking about financial security after retirement.\n\nJames enjoys the finer things in life, such as gold or platinum jewelry with diamonds, and he occasionally buys these items, often spending \u20ac750 or more. However, he is not one to splurge recklessly and prefers thoughtful, well-considered purchases.\n\nIn summary, James exemplifies someone who has established wealth through careful financial planning, prudent investments, and a balanced approach to spending and saving.",
+            "content": "Absolutely, I enjoy cheese quite a bit. I often have it two or three times a week, sometimes even daily. Whether it's in blocks or grated, cheese is a staple in my diet.",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -56,7 +56,7 @@
     {
         "type": "human",
         "data": {
-            "content": "What did I tell you my name was again?",
+            "content": "do you like cheese?",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -68,7 +68,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "You mentioned your name is Fergal. How can I assist you further, Fergal?",
+            "content": "Yes, I do enjoy cheese. I often have it two or three times a week, and sometimes even daily. Cheese is a regular part of my diet, whether it's in blocks or grated.",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -83,7 +83,7 @@
     {
         "type": "human",
         "data": {
-            "content": "tell me if this target audience eats cheese and what kind",
+            "content": "How much do you spend on it weekly?",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -95,88 +95,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "Yes, the \"Established Wealth\" target audience does enjoy eating cheese. Here are some specifics:\n\n- **Popular Cheese Varieties**: \n  - Irish Cheddar\n  - Edam\n  - Mozzarella\n  - Parmesan\n  - Feta\n\n- **Types of Cheese**:\n  - Slices\n  - Cheese Spread\n  - Cottage Cheese\n  - Mini Cheeses in Packs/Nets\n\n- **Cheese Consumption Frequency**:\n  - Many consume cheese in blocks or grated form once a day or more.\n  - A significant portion are medium users, consuming cheese 2 or 3 times a week.\n\nThis audience appreciates a variety of cheeses and tends to incorporate them regularly into their diet.",
-            "additional_kwargs": {},
-            "response_metadata": {},
-            "type": "ai",
-            "name": null,
-            "id": null,
-            "example": false,
-            "tool_calls": [],
-            "invalid_tool_calls": [],
-            "usage_metadata": null
-        }
-    },
-    {
-        "type": "human",
-        "data": {
-            "content": "tell me if this target audience buys chewing gum and what kind",
-            "additional_kwargs": {},
-            "response_metadata": {},
-            "type": "human",
-            "name": null,
-            "id": null,
-            "example": false
-        }
-    },
-    {
-        "type": "ai",
-        "data": {
-            "content": "Yes, the \"Established Wealth\" target audience does buy chewing gum, although they are generally light users or may not consume it frequently. Here are some specifics:\n\n- **Frequency of Use**:\n  - Many are light users, consuming gum once a week or less.\n  - A significant portion never buys chewing gum.\n  - Some consume it once a day or more, but this is less common.\n\n- **Type of Gum**:\n  - Sugar-free gum is preferred.\n\n- **Popular Brands**:\n  - Silvermints\n  - Tic Tac\n  - Polo Mints\n  - Airwaves\n  - XXX Extra Strong\n  - Smint\n\nThis audience tends to prefer sugar-free options and favors specific brands like Silvermints and Tic Tac.",
-            "additional_kwargs": {},
-            "response_metadata": {},
-            "type": "ai",
-            "name": null,
-            "id": null,
-            "example": false,
-            "tool_calls": [],
-            "invalid_tool_calls": [],
-            "usage_metadata": null
-        }
-    },
-    {
-        "type": "human",
-        "data": {
-            "content": "can you give me quick demographic insights into the Established Wealth mosaic",
-            "additional_kwargs": {},
-            "response_metadata": {},
-            "type": "human",
-            "name": null,
-            "id": null,
-            "example": false
-        }
-    },
-    {
-        "type": "ai",
-        "data": {
-            "content": "The \"Established Wealth\" mosaic primarily consists of men, often in senior positions or retired. They are typically White Irish, and many are empty nesters or senior sole decision-makers. They have a strong interest in food, travel, and finance. Most are married, although there is a significant number who are single.",
-            "additional_kwargs": {},
-            "response_metadata": {},
-            "type": "ai",
-            "name": null,
-            "id": null,
-            "example": false,
-            "tool_calls": [],
-            "invalid_tool_calls": [],
-            "usage_metadata": null
-        }
-    },
-    {
-        "type": "human",
-        "data": {
-            "content": "give me some quick demographic insights",
-            "additional_kwargs": {},
-            "response_metadata": {},
-            "type": "human",
-            "name": null,
-            "id": null,
-            "example": false
-        }
-    },
-    {
-        "type": "ai",
-        "data": {
-            "content": "The \"Established Wealth\" mosaic primarily consists of men, often senior officials, directors, or retired professionals. They are predominantly White Irish and are usually empty nesters or senior sole decision-makers. Many are married, although a significant portion is single. Interests include food, holidays, sports, and finance.",
+            "content": "I typically spend quite a bit on cheese each week since I enjoy it frequently. I often have cheese two or three times a week, and sometimes even daily. This means my weekly cheese expenditure is relatively high, reflecting my regular consumption habits.",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",

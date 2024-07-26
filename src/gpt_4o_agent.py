@@ -1,10 +1,9 @@
 from dotenv import load_dotenv
 import os
-import asyncio
 import pandas as pd
-import argparse
 import threading
 import json
+from flask import Flask, request, jsonify
 from resource_monitoring import monitor_usage
 
 from langchain_community.vectorstores import FAISS
@@ -338,7 +337,7 @@ if tool_activation["tgi_interrogation"]:
   # TODO: Make the interests bit more explicit
   if interrogate_get_questions_tool not in tool_list:
     tool_list.append(interrogate_get_questions_tool)
-    system_init_prompt += """If the client asks more detailed questions about the demographics or interests within a target audience, use your interrogate_get_questions tool with the mosaic name and the user's query.
+    system_init_prompt += """If the client asks more detailed questions about the demographics or interests within a target audience, use your interrogate_get_questions tool with the exact mosaic name provided and the user's query.
                           The numbers represent popularity scores for the response, not numbers of individuals. Do not mention the scores.
                           Regardless of how the question is phrased, act like you are an individual from the target audience mosaic and answer as if the question was addressed to you. Do not mention the name of the mosaic you belong to.
                           You may use knowledge outside the context provided by the characteristic scores from the documents to supplement your answer.
@@ -393,13 +392,13 @@ def load_memory(session_id):
     return ConversationBufferWindowMemory(k = 5, input_key="input", output_key="output")
 
 # Method to submit a message, get a response, and have the interaction recorded in history
-async def submit_message(session_id, mosaic_id, input_message):
+def submit_message(session_id, mosaic_id, input_message):
   # Deal with memory
   memory_path = os.environ.get("FILE_ORIGIN") + os.environ.get("HISTORY_PATH") + str(session_id) + '.json'
   memory = load_memory(session_id)
 
   # Create definitive prompt
-  user_init_prompt = "Please help me explore the following target mosaic: " + mosaic_id + "\n"
+  user_init_prompt = "All my target audience questions are related to the following target mosaic: " + mosaic_id + "\n"
   user_init_prompt += "Here is what I want: {}"
 
   prompt = ChatPromptTemplate.from_messages(
@@ -431,22 +430,38 @@ async def submit_message(session_id, mosaic_id, input_message):
                                 verbose=True,
                                 handle_parsing_errors=True,
                                 return_intermediate_steps=True)
-  response = await agent_executor.ainvoke({"input": input_message, "chat_history": memory.buffer_as_messages})
+  response = agent_executor.invoke({"input": input_message, "chat_history": memory.buffer_as_messages})
   extracted_messages = memory.chat_memory.messages
   with open(memory_path, 'w') as file:
     json.dump(messages_to_dict(extracted_messages), file, indent = 4)
   return response['output']
 
-async def main(session_id, mosaic_id, input_message):
-  response = await submit_message(session_id, mosaic_id, input_message)
+# Main method to interact with the agent and retrieve the response
+def main(session_id, mosaic_id, input_message):
+  response = submit_message(session_id, mosaic_id, input_message)
   return response
 
-# Submit command-line message and get response
+# Deployment related API setup
+agent_app = Flask(__name__)
+@agent_app.route('/api/syncus', methods = ['POST'])
+def process():
+  data = request.json
+  if not data or not all(param in data for param in ("session_id", "mosaic_id", "input_message")):
+    return jsonify({"ERROR": "MISSING REQUIRED PARAMETERS"}), 400
+  
+  session_id = data["session_id"]
+  mosaic_id = data["mosaic_id"]
+  input_message = data["input_message"]
 
+  response = main(session_id, mosaic_id, input_message)
+  return jsonify({"RESPONSE": response})
+
+# Submit command-line message and get response
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(description="Process the input message for the given memory and mosaic keys.")
-  parser.add_argument("session_id", type=str, help="Key to retrieve the correct agent memory.")
-  parser.add_argument("mosaic_id", type=str, help="Key to address the correct target audience mosaic")
-  parser.add_argument("input_message", type=str, help="Message the AI assistant should respond to.")
-  args = parser.parse_args()
-  asyncio.run(main(args.session_id, args.mosaic_id, args.input_message))
+  #parser = argparse.ArgumentParser(description="Process the input message for the given memory and mosaic keys.")
+  #parser.add_argument("session_id", type=str, help="Key to retrieve the correct agent memory.")
+  #parser.add_argument("mosaic_id", type=str, help="Key to address the correct target audience mosaic")
+  #parser.add_argument("input_message", type=str, help="Message the AI assistant should respond to.")
+  #args = parser.parse_args()
+  #asyncio.run(main(args.session_id, args.mosaic_id, args.input_message))
+  agent_app.run()

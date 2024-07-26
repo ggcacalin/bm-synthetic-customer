@@ -19,3 +19,5 @@ faiss-cpu == 1.8.0.post1
 pandas
 python-dotenv
 psutil
+flask
+gunicorn
