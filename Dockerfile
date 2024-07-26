@@ -6,4 +6,8 @@ COPY . /syncus
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["python", "./src/gpt_4o_agent.py"]
+EXPOSE 80
+
+ENV PYTHONPATH = "${PYTHONPATH}:/syncus/src"
+
+CMD ["gunicorn", "-c", "gunicorn_config.py", "src.gpt_4o_agent:agent_app"]

@@ -120,12 +120,11 @@ if tool_activation["mosaic_identification"]:
   )
 
   # Updating the lists of functions and tools and instructing assistant on function use in the prompt
-  if get_mosaics_tool not in tool_list:
-    tool_list.append(get_mosaics_tool)
-    system_init_prompt += """Use your get_mosaics tool to recommend the demographic group mosaics that best match the client's description if you are asked about target audiences.
-                          If the client is not satisfied with any recommendation, use the function to look up a new set of mosaics.
-                          """
-    function_list.append(get_mosaics_function)
+  tool_list.append(get_mosaics_tool)
+  system_init_prompt += """Use your get_mosaics tool to recommend the demographic group mosaics that best match the client's description if you are asked about target audiences.
+                        If the client is not satisfied with any recommendation, use the function to look up a new set of mosaics.
+                        """
+  function_list.append(get_mosaics_function)
 
 #Title recommendation and budget allocation self-contained tool
 if tool_activation["title_recommendation"]:
@@ -397,7 +396,7 @@ def submit_message(session_id, mosaic_id, input_message):
   memory_path = os.environ.get("FILE_ORIGIN") + os.environ.get("HISTORY_PATH") + str(session_id) + '.json'
   memory = load_memory(session_id)
 
-  # Create definitive prompt
+  # Create user prompt and combine with system for full version
   user_init_prompt = "All my target audience questions are related to the following target mosaic: " + mosaic_id + "\n"
   user_init_prompt += "Here is what I want: {}"
 
@@ -458,10 +457,4 @@ def process():
 
 # Submit command-line message and get response
 if __name__ == "__main__":
-  #parser = argparse.ArgumentParser(description="Process the input message for the given memory and mosaic keys.")
-  #parser.add_argument("session_id", type=str, help="Key to retrieve the correct agent memory.")
-  #parser.add_argument("mosaic_id", type=str, help="Key to address the correct target audience mosaic")
-  #parser.add_argument("input_message", type=str, help="Message the AI assistant should respond to.")
-  #args = parser.parse_args()
-  #asyncio.run(main(args.session_id, args.mosaic_id, args.input_message))
-  agent_app.run()
+  agent_app.run(port = 80)
