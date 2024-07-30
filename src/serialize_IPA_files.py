@@ -30,27 +30,26 @@ monitor_thread.start()
 
 def main():
   # IPA retriever self-contained tool
-  if ipa_faiss_path.removeprefix(file_origin) not in os.listdir(file_origin):
-    for knowledge_path in knowledge_source_list:
-      print(os.listdir(knowledge_path))
-      ipa_docs = []
-      # Load the pdf documents across all source paths
-      for fn in os.listdir(knowledge_path):
-        file_path = os.path.join(knowledge_path, fn)
-        print(fn)
-        if fn[-3:] == 'pdf':
-          loader = PyPDFLoader(file_path, extract_images = False)
-          documents = loader.load()
-          # Correcting reading issues and splitting into smaller chunks
-          for doc in documents:
-            doc.page_content = doc.page_content.replace('\n', ' ')
-          split_documents = TokenTextSplitter(model_name = 'gpt-4o', chunk_size=300, chunk_overlap=30).split_documents(documents)
-          ipa_docs.extend(split_documents)
+  for knowledge_path in knowledge_source_list:
+    print(os.listdir(knowledge_path))
+    ipa_docs = []
+    # Load the pdf documents across all source paths
+    for fn in os.listdir(knowledge_path):
+      file_path = os.path.join(knowledge_path, fn)
+      print(fn)
+      if fn[-3:] == 'pdf':
+        loader = PyPDFLoader(file_path, extract_images = False)
+        documents = loader.load()
+        # Correcting reading issues and splitting into smaller chunks
+        for doc in documents:
+          doc.page_content = doc.page_content.replace('\n', ' ')
+        split_documents = TokenTextSplitter(model_name = 'gpt-4o', chunk_size=300, chunk_overlap=30).split_documents(documents)
+        ipa_docs.extend(split_documents)
 
-    # Create vectorstore from previously-compiled document list
-    ipa_db = FAISS.from_documents(ipa_docs, OpenAIEmbeddings())
-    print(ipa_db.index.ntotal)
-    ipa_db.save_local(ipa_faiss_path)
+  # Create vectorstore from previously-compiled document list
+  ipa_db = FAISS.from_documents(ipa_docs, OpenAIEmbeddings())
+  print(ipa_db.index.ntotal)
+  ipa_db.save_local(ipa_faiss_path)
 
 if __name__ == "__main__":
   main()
