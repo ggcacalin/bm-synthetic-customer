@@ -55,12 +55,15 @@ tgi_serialization_path = file_origin + os.environ.get("TGI_SERIAL_PATH")
 ipa_faiss_path = file_origin + os.environ.get("IPA_PATH")
 
 # Fixed model parameters
-model_temp = 0.5
+model_temp = 1
 model_mt = 1500
 
 # Dynamic model parameters (updated as tools are added)
 system_init_prompt = """You are a harmless, helpful, and honest marketing manager talking to a client.
-                     Only answer marketing-related questions and avoid putting the marketing field or your company in a bad light. """
+                     Only answer marketing-related questions and avoid saying negative things about your trade or your company. 
+                     If you are asked to regenereate an aswer to a certain query, you must try to find new content in the context to answer the question.
+                     Avoid repeating yourself.
+                     """
 tool_list = []
 function_list = []
 
@@ -183,11 +186,12 @@ if tool_activation["title_recommendation"]:
 # TGI question-based NUGGET GENERATION self-contained tool
 if tool_activation["tgi_nuggets"]:
   def nuggets_get_questions(mosaic_name: str) -> str:
+    keywords = "Age, Gender, Job, Occupation, Activities, Interest, Media"
     questions_to_return = ""
     question_db = FAISS.load_local(tgi_serialization_path + mosaic_name, OpenAIEmbeddings(), allow_dangerous_deserialization = True)
     question_retriever = question_db.as_retriever(search_kwargs = {'k': 10})
     # Gather most fitting questions for mosaic name and user keywords
-    question_list = question_retriever.invoke("Demographics, age, sex, gender, race, ethnicity, nationality, occupation, sector, married, status")
+    question_list = question_retriever.invoke(keywords)
     for question in question_list:
       questions_to_return += question.page_content
       questions_to_return += "\n\n"
@@ -200,7 +204,7 @@ if tool_activation["tgi_nuggets"]:
   # OpenAI function based on the method, loaded directly into the LLM
   nuggets_get_questions_function = {
       "name": "nuggets_get_questions",
-      "description": "Get the questions of the mosaic discussed that relate to demographics.",
+      "description": "Get the questions of the mosaic discussed that discuss important traits of the target audience.",
       "parameters": {
           "type": "object",
           "properties": {
@@ -217,29 +221,29 @@ if tool_activation["tgi_nuggets"]:
   nuggets_get_questions_tool = StructuredTool.from_function(
       func = nuggets_get_questions,
       args_schema = NuggetQuestions,
-      description = "Get the questions of the mosaic discussed that relate to demographics."
+      description = "Get the questions of the mosaic discussed that discuss important traits of the target audience."
   )
 
   # Updating the lists of functions and tools and instructing assistant on function use in the prompt
   if nuggets_get_questions_tool not in tool_list:
     tool_list.append(nuggets_get_questions_tool)
     system_init_prompt += """If the client asks for demographic insights or information nuggets, use your nuggets_get_questions tool with the mosaic name being discussed.
-                          The numbers represent popularity scores for the response, not numbers of individuals.
-                          Create a succint enumeration of demographic features that score the highest in the mosaic, such as age, gender, ethnicity, occupation, and marital status of the average individual in the mosaic.
-                          You must not use special characters and you are not allowed to make a bullet point list, write everything in one paragraph.
-                          You may infer information on the demographics from what data you have if you can't find what you need in the questions.
+                          Create a brief list of age, gender, job, two interests, and two media preferences that score the highest in the questions.
+                          You may infer information from what data you have if you can't find what you need in the questions. Here is an example list you would create:
+                          25 years old, Man, Artist, Painting, Sports, Digital, Social Media
                           """
     function_list.append(nuggets_get_questions_function)
 
 # TGI question-based mosaic SUMMARIZATION self-contained tool
 if tool_activation["tgi_summarization"]:
-  def summarization_get_questions(mosaic_name: str, previous_keywords: str) -> str:
+  def summarization_get_questions(mosaic_name: str) -> str:
+    keywords = "Age, Gender, Occupation, Marital, Interest, Activity, Shop, Media, News"
     questions_to_return = ""
     # Load question vectorstore based on mosaic name
     question_db = FAISS.load_local(tgi_serialization_path + mosaic_name, OpenAIEmbeddings(), allow_dangerous_deserialization = True)
     question_retriever = question_db.as_retriever(search_kwargs = {'k': 10})
     # Gather most fitting questions for mosaic name and user keywords
-    question_list = question_retriever.invoke(mosaic_name + " " + previous_keywords)
+    question_list = question_retriever.invoke(keywords)
     for question in question_list:
       questions_to_return += question.page_content
       questions_to_return += "\n\n"
@@ -248,25 +252,20 @@ if tool_activation["tgi_summarization"]:
   # BaseModel to help assistant know when to call the function
   class SummaryQuestions(BaseModel):
     mosaic_name: str = Field(..., description = "Name of target audience mosaic to find question names and scores for")
-    previous_keywords: str = Field(..., description = "Keywords the user previously submitted to get a mosaic recommended")
 
   # OpenAI function based on the method, loaded directly into the LLM
   summarization_get_questions_function = {
       "name": "summarization_get_questions",
-      "description": "Get the questions most related to the mosaic name and audience features given by the user.",
+      "description": "Get the quesstions that create the best short self-description of someone in the target audience.",
       "parameters": {
           "type": "object",
           "properties": {
               "mosaic_name": {
                   "type": "string",
                   "description": "Name of target audience mosaic to find question names and scores for"
-              },
-              "previous_keywords": {
-                  "type": "string",
-                  "description": "Keywords the user previously submitted to get a mosaic recommended"
               }
           },
-          "required": ["mosaic_name", "previous_keywords"]
+          "required": ["mosaic_name"]
       }
   }
 
@@ -274,15 +273,14 @@ if tool_activation["tgi_summarization"]:
   summarization_get_questions_tool = StructuredTool.from_function(
       func = summarization_get_questions,
       args_schema = SummaryQuestions,
-      description = "Get the questions most related to the mosaic name and audience features given by the user."
+      description = "Get the quesstions that create the best short self-description of someone in the target audience."
   )
 
   # Updating the lists of functions and tools and instructing assistant on function use in the prompt
   if summarization_get_questions_tool not in tool_list:
     tool_list.append(summarization_get_questions_tool)
-    system_init_prompt += """If the client asks for a description or summary of the target audience mosaic, use your summarization_get_questions tool with the same query from get_mosaics and the mosaic name.
-                          The numbers represent popularity scores for the response, not numbers of individuals.
-                          Give the description as a story about an individual from the group, not an itemized list.
+    system_init_prompt += """If the client asks for a description or summary of the target audience mosaic, use your summarization_get_questions tool to get the highest rated answer to relevant questions.
+                          Tell the user you can impersonate an audience member for them, then roleplay an individual from the group and describe yourself using the information in the questions.
                           """
     function_list.append(summarization_get_questions_function)
 
@@ -382,7 +380,7 @@ def load_memory(session_id):
     with open(memory_path, 'r') as file:
       retrieved_messages = messages_from_dict(json.load(file))
     retrieved_chat_history = ChatMessageHistory(messages=retrieved_messages)
-    retrieved_memory = ConversationBufferWindowMemory(chat_memory = retrieved_chat_history, k = 5, input_key="input", output_key="output")
+    retrieved_memory = ConversationBufferWindowMemory(chat_memory = retrieved_chat_history, k = 4, input_key="input", output_key="output")
     return retrieved_memory
   # Creates a fresh memory and a JSON for it to be dumped at the end
   else:
