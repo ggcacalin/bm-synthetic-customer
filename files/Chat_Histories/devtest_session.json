@@ -1,0 +1,137 @@
+[
+    {
+        "type": "human",
+        "data": {
+            "content": "summarise the average person in the mosaic",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "The average person in the \"established wealth\" mosaic might describe themselves as follows:\n\n\"I am an individual who frequently reads the news online and enjoys delving into magazine articles. I also spend a fair amount of time planning holidays and consulting maps for route planning. My interests span across food, travel, sports, and finance, and I like keeping up with cinema, films, and the latest in technology.\n\nWhen I\u2019m online, I often find myself looking for practical information like recipes and home d\u00e9cor ideas, as well as checking out local events listings. I also make video and internet voice calls, use instant messaging, and engage with social media to keep in touch with friends and family. I still find traditional media such as newspapers and magazines important for obtaining information, but I also make use of email and social media for buying decisions.\n\nI take a lot of photos, listen to the radio, and watch videos regularly. For relaxation, I enjoy activities such as cooking, completing crossword puzzles, and participating in quiz nights. Walking, family history research, and occasionally playing board games are also part of my leisure activities.\n\nI tend to visit familiar websites frequently and value the security of my personal information online. Though I browse social media daily, I don't feel compelled to post every day. Reviews and expert opinions influence my purchasing decisions, and I often refer to the internet before making a major purchase.\"",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "summarise the average person in the target audience",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Meet Robert, an individual who epitomizes established wealth. Robert is in his late 40s, well-educated, and holds a prestigious position in a reputable company. He enjoys a luxurious lifestyle supported by a comfortable income, allowing him to indulge in various interests and activities.\n\nDaily, Robert delves into reading up-to-date news online and explores magazine articles. He spends a significant amount of time planning holidays, consulting maps for route planning, and seeking local information about restaurants and events. Viewing weather forecasts and traffic updates are also part of his routine.\n\nHis interests span across food, travel, sports, finance, technology, cinema, and education. He frequently looks for practical information like recipes and home d\u00e9cor ideas and enjoys keeping up with expert reviews and user opinions before making purchases.\n\nWhen it comes to relaxation, Robert loves cooking, solving crossword puzzles, engaging in quiz nights, and partaking in family history research or walking. He also enjoys browsing familiar websites, ensuring the online security of his personal information, and interacting on social media, although he doesn't post daily.\n\nRobert is tech-savvy, often using his smartphone or tablet for instant messaging, making internet voice and video calls, and engaging with social networking platforms. Listening to music, reading newspapers, and watching videos are regular activities.\n\nSummarizing Robert\u2019s profile:\n- **Age**: Late 40s\n- **Gender**: Male\n- **Occupation**: High-level Executive\n- **Education**: Well-educated\n- **Income**: Comfortable with a high disposable income\n- **Interests**: Food, travel, sports, finance, technology, cinema, education\n- **Media Consumption**: News online, magazines, expert reviews\n- **Leisure Activities**: Cooking, puzzles, quiz nights, walking, family history research\n- **Tech Usage**: Smartphones/tablets for messaging, calls, social networking\n\nThis is Robert's story - a tale of affluence, well-rounded interests, and a balanced lifestyle.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "nighty night",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "As part of the \"established wealth\" target audience, here's how I typically wind down at night:\n\n- **Evening Shopping**: I occasionally do some top-up shopping in the evening, making sure I have everything I need for the next day.\n- **Evening Out**: When I go out in the evening without having a meal, my drink of choice is often wine, champagne, or prosecco. I also sometimes enjoy spirits, whether they are white, dark, or pre-mixed.\n- **Nightwear Preferences**: When it comes to nightwear, pyjamas, or other leisurewear, I tend to spend between \u20ac30 and \u20ac49. \n\nThese activities help me relax and enjoy my evenings.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "give me some insights about the target audience",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Here are some detailed insights into the \"established wealth\" target audience:\n\n- **Information Seeking**:\n  - Frequently read news online, including sources like RT\u00c9 News\n  - Enjoy reading magazine articles regularly\n  - Spend time consulting maps and planning routes, particularly when making holiday plans\n  - Often look for local information such as restaurants and events listings\n  - Regularly check weather forecasts and traffic updates\n  - Use online directories and work-related information sources\n  - Look for practical information like recipes and home d\u00e9cor ideas\n  - Refer to cinema, theatre, and concert listings\n  - Value user and expert reviews before making major purchases\n  - Occasionally search for new houses or flats and employment opportunities\n  - Visit brand sites to explore collections, deals, services, and products\n  - Sometimes view classified adverts and subscribe to brand newsletters\n\n- **Topics of Interest**:\n  - High interest in food, travel/holidays, and sports\n  - Interested in finance, economy, property, and technology\n  - Enjoy cinema, films, and educational topics\n  - Keep tabs on health, fitness, and government services\n  - DIY and gardening, television programs, and other cultural interests like theatre and plays are also valued\n  - Engage in puzzles, quizzes, music, societal issues, and environmental topics\n  - Enjoy family history research and academic studies in science, geography, and history\n  - Fashion, beauty, and celebrity stories also attract some interest\n\n- **Media Usage**:\n  - Frequently take photos, watch videos, and play games\n  - Occasionally make videos and listen to traditional radio\n  - Read books regularly\n\nFrom these insights, it's clear that this audience is highly engaged, well-educated, and has a wide range of interests from practical information to cultural and leisure activities. They are tech-savvy and rely on various online sources for information and entertainment.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "do you have any other insights?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "Here are some additional insights into the \"established wealth\" mosaic:\n\n**Smartphone/Tablet Usage**:\n- Frequently use instant messaging services.\n- Make internet voice calls and video calls regularly.\n- Active on social networking platforms like Facebook and MySpace.\n- Occasionally read blogs and use professional networking sites such as LinkedIn.\n- Sometimes visit chat rooms or forums.\n- Less frequently, they read Twitter feeds, write or update blogs, and make or update their own websites.\n\n**Lifestyle Preferences**:\n- Tend to disagree with statements like:\n  - \"I like to listen to new bands.\"\n  - \"I worry about work during my leisure time.\"\n  - \"When we sit down for a meal at home we rarely eat the same thing.\"\n  - \"Music is an important part of my life.\"\n  - \"I prefer to be active in my leisure time.\"\n- Occasionally feel overwhelmed by the number of subscription services available.\n- Typically not very interested in trendy places to eat and drink.\n- Enjoy entertaining people at home to a lesser extent.\n- Disagree with having meals at irregular times; like to have set meal times.\n- Prefer home-cooked meals over take-away meals.\n- Often feel there are not enough hours in the day to do everything they would like.\n- Enjoy spending time with their family but not necessarily their favorite pastime.\n- Consider themselves interested in the arts and other cultures.\n- Show a moderate interest in keeping up with the latest news and developments in the video games industry.\n- Prefer sitting down for meals together at home but do not prioritize playing video games regularly.\n- Like to understand nature and occasionally enjoy splurging on meals at restaurants.\n\n**Media Consumption**:\n- Tend to disagree with:\n  - \"I read daily newspapers more for entertainment than for news.\"\n  - \"I enjoy reading magazine articles about local celebrities and events.\"\n  - \"I am not concerned about the political views of my newspaper.\"\n  - \"I rarely notice adverts in newspapers and magazines.\"\n  - \"I often enter competitions in newspapers and magazines.\"\n  - \"I cannot resist buying magazines.\"\n- Value local newspapers for local news coverage.\n- Do not significantly prioritize financial sections in newspapers.\n- Print magazines are still read, but they also engage with online versions.\n- Rely on newspapers to stay informed and read them most days.\n\nThese insights indicate that individuals in the \"established wealth\" mosaic have structured and family-oriented lifestyle preferences, a balanced approach to traditional and online media consumption, and a thoughtful approach to financial and cultural information.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    }
+]

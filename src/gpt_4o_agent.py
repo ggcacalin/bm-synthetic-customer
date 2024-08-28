@@ -3,8 +3,10 @@ import os
 import pandas as pd
 import threading
 import json
+import process_TGI_JSONs
 from flask import Flask, request, jsonify
 from resource_monitoring import monitor_usage
+from random import randrange
 
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
@@ -185,21 +187,37 @@ if tool_activation["title_recommendation"]:
 
 # TGI question-based NUGGET GENERATION self-contained tool
 if tool_activation["tgi_nuggets"]:
-  def nuggets_get_questions(mosaic_name: str) -> str:
-    keywords = "Age, Gender, Job, Occupation, Activities, Interest, Media"
-    questions_to_return = ""
+  k = 33
+  def nuggets_get_questions(mosaic_name: str, generate_again: bool) -> str:
     question_db = FAISS.load_local(tgi_serialization_path + mosaic_name, OpenAIEmbeddings(), allow_dangerous_deserialization = True)
-    question_retriever = question_db.as_retriever(search_kwargs = {'k': 10})
-    # Gather most fitting questions for mosaic name and user keywords
+    question_retriever = question_db.as_retriever(search_kwargs = {'k': k})
+    keywords = "Occupation, Activities, Interests, Opinions, Media Consumption"
+
+    # If first run (regenerate set to false hopefully), gather most fitting questions for mosaic name and user keywords
+    questions_to_return = ""
     question_list = question_retriever.invoke(keywords)
-    for question in question_list:
-      questions_to_return += question.page_content
-      questions_to_return += "\n\n"
+    if not generate_again:
+      for i in range(3):
+        string_question = question_list[i].page_content
+        questions_to_return += string_question
+        questions_to_return += "\n\n"
+
+    # If not first run (regenerate set to true hopefully), pick 3 random insights without repetition that aren't in the top 3
+    else:
+      used_index = []
+      while len(used_index) < 3:
+        random_index = randrange(3, k+1, 1)
+        if random_index not in used_index:
+          used_index.append(random_index)
+          questions_to_return += question_list[random_index].page_content
+          questions_to_return += "\n\n"
+
     return questions_to_return
   
   # BaseModel to help assistant know when to call the function
   class NuggetQuestions(BaseModel):
     mosaic_name: str = Field(..., description = "Name of target audience mosaic to find question names and scores for")
+    generate_again: bool = Field(..., description = "Indicator that is true if the tool is used again after another recent usage, and false if it was not used before.")
 
   # OpenAI function based on the method, loaded directly into the LLM
   nuggets_get_questions_function = {
@@ -211,9 +229,13 @@ if tool_activation["tgi_nuggets"]:
               "mosaic_name": {
                   "type": "string",
                   "description": "Name of target audience mosaic to find question names and scores for"
+              },
+              "generate_again": {
+                  "type": "boolean",
+                  "description": "Indicator that is true if the tool is used again after another recent usage, and false if it was not used before."
               }
           },
-          "required": ["mosaic_name"]
+          "required": ["mosaic_name", "generate_again"]
       }
   }
 
@@ -227,11 +249,13 @@ if tool_activation["tgi_nuggets"]:
   # Updating the lists of functions and tools and instructing assistant on function use in the prompt
   if nuggets_get_questions_tool not in tool_list:
     tool_list.append(nuggets_get_questions_tool)
-    system_init_prompt += """If the client asks for demographic insights or information nuggets, use your nuggets_get_questions tool with the mosaic name being discussed.
-                          Create a brief list of age, gender, job, two interests, and two media preferences that score the highest in the questions.
-                          You may infer information from what data you have if you can't find what you need in the questions. Here is an example list you would create:
-                          25 years old, Man, Artist, Painting, Sports, Digital, Social Media
-                          """
+    system_init_prompt += """If the client asks for insights or information nuggets, use your nuggets_get_questions tool with the mosaic name being discussed.
+    When calling the tool, generate_again should only be set to True if you recently generated other insights, otherwise it should be False.
+    Present this information on the average target audience member you got as a bullet point list of statements about them.
+    You may extrapolate additional insights from the information. 
+    If you previously made up a name for the target audience member you should use it, otherwise assign an appropriate name.
+    Here is an example bullet point: \'Andrew is interested in DIY and reads gardening magazines.\'
+    """
     function_list.append(nuggets_get_questions_function)
 
 # TGI question-based mosaic SUMMARIZATION self-contained tool
@@ -279,9 +303,11 @@ if tool_activation["tgi_summarization"]:
   # Updating the lists of functions and tools and instructing assistant on function use in the prompt
   if summarization_get_questions_tool not in tool_list:
     tool_list.append(summarization_get_questions_tool)
-    system_init_prompt += """If the client asks for a description or summary of the target audience mosaic, use your summarization_get_questions tool to get the highest rated answer to relevant questions.
-                          Tell the user you can impersonate an audience member for them, then roleplay an individual from the group and describe yourself using the information in the questions.
-                          """
+    system_init_prompt += """If the client asks for a description or summary of the target audience mosaic, 
+    use your summarization_get_questions tool to get the highest rated answer to relevant questions.
+    Present the information as a story about the average individual, giving them a fitting name. 
+    For example, you can start by saying \'Meet Jane, a 20 year old student ...\'.
+    End with a short bullet-point summary of the key characteristics, most importantly age, gender, ethnicity and occupation."""
     function_list.append(summarization_get_questions_function)
 
 #TGI question-based mosaic INTERROGATION self-contained tool
@@ -440,8 +466,9 @@ def main(session_id, mosaic_id, input_message):
 
 # Deployment related API setup
 agent_app = Flask(__name__)
+
 @agent_app.route('/api/syncus', methods = ['POST'])
-def process():
+def syncus():
   data = request.json
   if not data or not all(param in data for param in ("session_id", "mosaic_id", "input_message")):
     return jsonify({"ERROR": "MISSING REQUIRED PARAMETERS"}), 400
@@ -453,6 +480,27 @@ def process():
   response = main(session_id, mosaic_id, input_message)
   return jsonify({"RESPONSE": response})
 
+@agent_app.route('/api/json-update-rebuild-<rebuild>', methods = ['GET'])
+def update(rebuild):
+  if rebuild.lower() == 'true':
+    rebuild_bool = True
+  elif rebuild.lower() == 'false':
+    rebuild_bool = False
+  else:
+    return jsonify({"ERROR": "MUST SPECIFY REBUILD True/False"}), 400
+  mosaics_built = process_TGI_JSONs.main(rebuild_bool)
+  response = {
+    "UPDATE_COUNT": len(mosaics_built),
+    "MOSAICS_BUILT": mosaics_built
+  }
+  return jsonify(response)
+
 # Submit command-line message and get response
 if __name__ == "__main__":
-  agent_app.run(port = 80)
+  session_id = "devtest_session"
+  mosaic_id = "established_wealth"
+  input_message = input()
+  while input_message != "nighty night":
+    response = main(session_id, mosaic_id, input_message)
+    print(response)
+    input_message = input()

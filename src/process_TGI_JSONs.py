@@ -11,23 +11,24 @@ load_dotenv()
 
 file_origin = os.environ.get("FILE_ORIGIN")
 
-# Path to the input JSON dictionaries for TGI questions
-tgi_input_json_path = file_origin + os.environ.get("TGI_INPUT_PATH")
-
-# Dump for the processed human-readable JSON questions
-tgi_output_json_path = file_origin + os.environ.get("TGI_OUTPUT_PATH")
-
-# Path to FAISS byte-serialized mosaic questions for assistant use
-tgi_serialization_path = file_origin + os.environ.get("TGI_SERIAL_PATH")
-
 # Start monitoring in a separate thread
 monitor_thread = threading.Thread(target=monitor_usage)
 monitor_thread.daemon = True  # Allow the thread to exit when the main program exits
 monitor_thread.start()
 
-def main():
+def main(rebuild = False):
+  # Path to the input JSON dictionaries for TGI questions
+  tgi_input_json_path = file_origin + os.environ.get("TGI_INPUT_PATH")
+
+  # Dump for the processed human-readable JSON questions
+  tgi_output_json_path = file_origin + os.environ.get("TGI_OUTPUT_PATH")
+
+  # Path to FAISS byte-serialized mosaic questions for assistant use
+  tgi_serialization_path = file_origin + os.environ.get("TGI_SERIAL_PATH")
+
   # Saving raw TGI questions into vectorstore for semantic similarity search
-  for count, raw_json in enumerate(os.listdir(tgi_input_json_path)):
+  mosaics_built = []
+  for raw_json in os.listdir(tgi_input_json_path):
     file_path = os.path.join(tgi_input_json_path, raw_json)
 
     # Reading the JSON
@@ -39,8 +40,8 @@ def main():
     mosaic_name = mosaic_name.lower()
     mosaic_name = mosaic_name.replace(" ", "_")
 
-    if tgi_serialization_path + mosaic_name not in os.listdir(tgi_serialization_path):
-      print(raw_json + " ... " + str(count + 1) + "/" + str(len(os.listdir(tgi_input_json_path))) + " | " + mosaic_name)
+    if rebuild == True or mosaic_name not in os.listdir(tgi_serialization_path):
+      mosaics_built.append("File: " + raw_json + " | Mosaic: " + mosaic_name)
       # Data type names
       data_names = []
       for i in range(5):
@@ -131,5 +132,10 @@ def main():
           )
       question_db.save_local(tgi_serialization_path + mosaic_name)
 
+  return mosaics_built  
+
 if __name__ == "__main__":
-  main()
+  print('Rebuild? True/False: ')
+  rebuild = input()
+  result = main(rebuild)
+  print(result)
