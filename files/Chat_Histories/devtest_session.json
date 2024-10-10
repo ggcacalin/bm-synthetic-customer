@@ -2,7 +2,7 @@
     {
         "type": "human",
         "data": {
-            "content": "summarise the average person in the mosaic",
+            "content": "Summarise the target audience",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -14,7 +14,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "The average person in the \"established wealth\" mosaic might describe themselves as follows:\n\n\"I am an individual who frequently reads the news online and enjoys delving into magazine articles. I also spend a fair amount of time planning holidays and consulting maps for route planning. My interests span across food, travel, sports, and finance, and I like keeping up with cinema, films, and the latest in technology.\n\nWhen I\u2019m online, I often find myself looking for practical information like recipes and home d\u00e9cor ideas, as well as checking out local events listings. I also make video and internet voice calls, use instant messaging, and engage with social media to keep in touch with friends and family. I still find traditional media such as newspapers and magazines important for obtaining information, but I also make use of email and social media for buying decisions.\n\nI take a lot of photos, listen to the radio, and watch videos regularly. For relaxation, I enjoy activities such as cooking, completing crossword puzzles, and participating in quiz nights. Walking, family history research, and occasionally playing board games are also part of my leisure activities.\n\nI tend to visit familiar websites frequently and value the security of my personal information online. Though I browse social media daily, I don't feel compelled to post every day. Reviews and expert opinions influence my purchasing decisions, and I often refer to the internet before making a major purchase.\"",
+            "content": "```json\n{\n    \"summary\": \"Meet Sandra, a woman over 35 years old who belongs to the White - Irish ethnicity. While Sandra disagrees with becoming obsessed with cleaning due to COVID, she also tends to disagree with making money the ultimate measure of success, or considering her friends more important than her family. Though she slightly keeps fitness in her routine through activities like aerobics, she's more likely to pay attention to television advertisements. Sandra has a small amount of knowledge about public affairs and prefers discussing topics such as films or TV series with her acquaintances.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35 years old, attentively watching television, wearing fitness attire, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\"\n}\n```",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -29,7 +29,7 @@
     {
         "type": "human",
         "data": {
-            "content": "summarise the average person in the target audience",
+            "content": "Regenerate the summary",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -41,7 +41,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "Meet Robert, an individual who epitomizes established wealth. Robert is in his late 40s, well-educated, and holds a prestigious position in a reputable company. He enjoys a luxurious lifestyle supported by a comfortable income, allowing him to indulge in various interests and activities.\n\nDaily, Robert delves into reading up-to-date news online and explores magazine articles. He spends a significant amount of time planning holidays, consulting maps for route planning, and seeking local information about restaurants and events. Viewing weather forecasts and traffic updates are also part of his routine.\n\nHis interests span across food, travel, sports, finance, technology, cinema, and education. He frequently looks for practical information like recipes and home d\u00e9cor ideas and enjoys keeping up with expert reviews and user opinions before making purchases.\n\nWhen it comes to relaxation, Robert loves cooking, solving crossword puzzles, engaging in quiz nights, and partaking in family history research or walking. He also enjoys browsing familiar websites, ensuring the online security of his personal information, and interacting on social media, although he doesn't post daily.\n\nRobert is tech-savvy, often using his smartphone or tablet for instant messaging, making internet voice and video calls, and engaging with social networking platforms. Listening to music, reading newspapers, and watching videos are regular activities.\n\nSummarizing Robert\u2019s profile:\n- **Age**: Late 40s\n- **Gender**: Male\n- **Occupation**: High-level Executive\n- **Education**: Well-educated\n- **Income**: Comfortable with a high disposable income\n- **Interests**: Food, travel, sports, finance, technology, cinema, education\n- **Media Consumption**: News online, magazines, expert reviews\n- **Leisure Activities**: Cooking, puzzles, quiz nights, walking, family history research\n- **Tech Usage**: Smartphones/tablets for messaging, calls, social networking\n\nThis is Robert's story - a tale of affluence, well-rounded interests, and a balanced lifestyle.",
+            "content": "```json\n{\n    \"summary\": \"Meet Sandra, an Irish woman over the age of 35. Sandra spends a medium amount of time on social networking during weekends and enjoys spending time with her family, especially during holidays. She isn't particularly influenced by newspaper or magazine articles when choosing holidays and tends to disagree with ads featuring celebrities. Sandra agrees that reports on violence and crime impact the way she leads her life. On the weekends, she might engage in aerobics or keep fit activities. Contrary to taking risks, she prefers to stay safe and not worry overly about the future. Nonetheless, Sandra finds it comfortable to speak about things that trouble her, and she may have children or grandchildren aged between 18 and 25 years.\",\n    \"image_prompt\": \"Create a realistic portrait photography of an Irish woman over 35 years old, spending time with family in a casual setting, wearing sporty leisurewear, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\"\n}\n```",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -56,7 +56,7 @@
     {
         "type": "human",
         "data": {
-            "content": "nighty night",
+            "content": "Rephrase the summary, careful to keep the same JSON format as before",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -68,7 +68,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "As part of the \"established wealth\" target audience, here's how I typically wind down at night:\n\n- **Evening Shopping**: I occasionally do some top-up shopping in the evening, making sure I have everything I need for the next day.\n- **Evening Out**: When I go out in the evening without having a meal, my drink of choice is often wine, champagne, or prosecco. I also sometimes enjoy spirits, whether they are white, dark, or pre-mixed.\n- **Nightwear Preferences**: When it comes to nightwear, pyjamas, or other leisurewear, I tend to spend between \u20ac30 and \u20ac49. \n\nThese activities help me relax and enjoy my evenings.",
+            "content": "```json\n{\n    \"summary\": \"Meet Sandra, an Irish woman in her late 30s. She balances her weekends with moderate social networking and cherishes family time, especially during holidays. She rarely lets newspaper or magazine ads dictate her holiday choices and is skeptical about celebrity endorsements in advertisements. Reports on crime and violence significantly shape her lifestyle. On weekends, she might engage in aerobics or fitness activities, leaning towards caution rather than risk. Comfortably, she shares concerns and has children or grandchildren aged between 18 and 25.\",\n    \"image_prompt\": \"Create a realistic portrait photography of an Irish woman in her late 30s, enjoying casual family time, wearing sporty leisurewear, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\"\n}\n```",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -83,7 +83,7 @@
     {
         "type": "human",
         "data": {
-            "content": "give me some insights about the target audience",
+            "content": "Give me insights into the target audience's occupation",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -95,7 +95,7 @@
     {
         "type": "ai",
         "data": {
-            "content": "Here are some detailed insights into the \"established wealth\" target audience:\n\n- **Information Seeking**:\n  - Frequently read news online, including sources like RT\u00c9 News\n  - Enjoy reading magazine articles regularly\n  - Spend time consulting maps and planning routes, particularly when making holiday plans\n  - Often look for local information such as restaurants and events listings\n  - Regularly check weather forecasts and traffic updates\n  - Use online directories and work-related information sources\n  - Look for practical information like recipes and home d\u00e9cor ideas\n  - Refer to cinema, theatre, and concert listings\n  - Value user and expert reviews before making major purchases\n  - Occasionally search for new houses or flats and employment opportunities\n  - Visit brand sites to explore collections, deals, services, and products\n  - Sometimes view classified adverts and subscribe to brand newsletters\n\n- **Topics of Interest**:\n  - High interest in food, travel/holidays, and sports\n  - Interested in finance, economy, property, and technology\n  - Enjoy cinema, films, and educational topics\n  - Keep tabs on health, fitness, and government services\n  - DIY and gardening, television programs, and other cultural interests like theatre and plays are also valued\n  - Engage in puzzles, quizzes, music, societal issues, and environmental topics\n  - Enjoy family history research and academic studies in science, geography, and history\n  - Fashion, beauty, and celebrity stories also attract some interest\n\n- **Media Usage**:\n  - Frequently take photos, watch videos, and play games\n  - Occasionally make videos and listen to traditional radio\n  - Read books regularly\n\nFrom these insights, it's clear that this audience is highly engaged, well-educated, and has a wide range of interests from practical information to cultural and leisure activities. They are tech-savvy and rely on various online sources for information and entertainment.",
+            "content": "```json\n{\n    \"knowledge\": \"The target audience consists entirely of Irish White women over the age of 35 who frequently engage with online video sites.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over the age of 35, engaging with content on an online video site, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"The audience consistently utilizes online video sites, reflecting high engagement with digital media.\"\n}\n```",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
@@ -110,7 +110,7 @@
     {
         "type": "human",
         "data": {
-            "content": "do you have any other insights?",
+            "content": "Give me an insight into the target audience's occupation",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "human",
@@ -122,7 +122,331 @@
     {
         "type": "ai",
         "data": {
-            "content": "Here are some additional insights into the \"established wealth\" mosaic:\n\n**Smartphone/Tablet Usage**:\n- Frequently use instant messaging services.\n- Make internet voice calls and video calls regularly.\n- Active on social networking platforms like Facebook and MySpace.\n- Occasionally read blogs and use professional networking sites such as LinkedIn.\n- Sometimes visit chat rooms or forums.\n- Less frequently, they read Twitter feeds, write or update blogs, and make or update their own websites.\n\n**Lifestyle Preferences**:\n- Tend to disagree with statements like:\n  - \"I like to listen to new bands.\"\n  - \"I worry about work during my leisure time.\"\n  - \"When we sit down for a meal at home we rarely eat the same thing.\"\n  - \"Music is an important part of my life.\"\n  - \"I prefer to be active in my leisure time.\"\n- Occasionally feel overwhelmed by the number of subscription services available.\n- Typically not very interested in trendy places to eat and drink.\n- Enjoy entertaining people at home to a lesser extent.\n- Disagree with having meals at irregular times; like to have set meal times.\n- Prefer home-cooked meals over take-away meals.\n- Often feel there are not enough hours in the day to do everything they would like.\n- Enjoy spending time with their family but not necessarily their favorite pastime.\n- Consider themselves interested in the arts and other cultures.\n- Show a moderate interest in keeping up with the latest news and developments in the video games industry.\n- Prefer sitting down for meals together at home but do not prioritize playing video games regularly.\n- Like to understand nature and occasionally enjoy splurging on meals at restaurants.\n\n**Media Consumption**:\n- Tend to disagree with:\n  - \"I read daily newspapers more for entertainment than for news.\"\n  - \"I enjoy reading magazine articles about local celebrities and events.\"\n  - \"I am not concerned about the political views of my newspaper.\"\n  - \"I rarely notice adverts in newspapers and magazines.\"\n  - \"I often enter competitions in newspapers and magazines.\"\n  - \"I cannot resist buying magazines.\"\n- Value local newspapers for local news coverage.\n- Do not significantly prioritize financial sections in newspapers.\n- Print magazines are still read, but they also engage with online versions.\n- Rely on newspapers to stay informed and read them most days.\n\nThese insights indicate that individuals in the \"established wealth\" mosaic have structured and family-oriented lifestyle preferences, a balanced approach to traditional and online media consumption, and a thoughtful approach to financial and cultural information.",
+            "content": "```json\n{\n    \"knowledge\": \"The audience primarily consists of White - Irish women over the age of 35, and most of their spouses or partners are employed full-time (30 hours a week).\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35 with a spouse working full-time, depicted in a domestic scene, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A significant proportion of this target audience's spouses or partners have full-time employment.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The audience primarily consists of White - Irish women over the age of 35. Notably, 84% of their spouses or partners are employed in full-time positions.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35 with a spouse engaged in a full-time career, depicted in an intimate home setting, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A majority of this audience's spouses or partners are engaged in full-time employment.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Give me an insight into the target audience's job",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The audience, predominantly White - Irish women over 35, have spouses or partners who are mostly employed full-time, with approximately 84% working at least 30 hours a week.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, with her spouse engaged in a professional setting, captured with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"Most partners or spouses of this audience are employed full-time, contributing to the household's financial stability.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The target audience 'Sandra' consists entirely of Irish White women over the age of 35. Notably, 84.41% of their spouses or partners work full-time (30 hours a week).\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, depicted in harmony with her spouse engaged in full-time employment, showcasing a prosperous domestic life, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A notable portion of this target audience's spouses or partners are employed full-time, reflecting a stable professional dynamic.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Give me an insight about the target audience's job",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The target audience 'Sandra' consists entirely of Irish White women over the age of 35. A significant portion of these women have spouses or partners who are employed full-time.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, shown with her partner who is engaged in full-time employment, symbolizing a secure professional life, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A key characteristic of the 'Sandra' mosaic is the full-time employment of spouses or partners, which contributes to the financial stability of their households.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The target audience 'Sandra' consists entirely of Irish White women over the age of 35. Among them, 84.41% have spouses or partners who are employed in full-time positions.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, characterized by a professionally active partner working full-time, reflecting a settled life, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"Among the 'Sandra' mosaic, the majority of partners or spouses are engaged in full-time occupations, indicating a prevalent professional commitment.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Give me an insight into the target audience's occupation",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The target audience 'Sandra' are all women over the age of 35, predominantly of White - Irish descent. Many are in occupations requiring responsibility and decision-making but largely have spouses or partners employed full-time, providing financial support.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, captured in a professional setting, complemented by her partner engaged in a full-time job, embodying a sense of teamwork in everyday life, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"The 'Sandra' mosaic frequently features women whose professional lives are combined with the support system of a partner working full-time, securing household financial stability.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The target audience 'Sandra' are women over the age of 35, predominantly of White - Irish descent. Many have spouses or partners who are employed full-time.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, in a professional environment, partnered with someone who works full-time, representing a balance between career and home, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A significant portion of the 'Sandra' mosaic are women supported by partners with full-time jobs, offering financial security while they possibly pursue responsible careers themselves.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": \"The 'Sandra' mosaic consists of women over the age of 35, mostly of White - Irish ethnicity. Few of them, specifically 6.18%, are engaged in horse riding as a leisure activity.\",\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, depicted with elements of horseback riding or an outdoor setting, capturing the essence of active leisure interests, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"Horse riding is a notable pastime among a consistent segment of the 'Sandra' mosaic, highlighting their preference for engaging outdoor activities.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": {\n        \"Sex\": \"\\\"All Women\\\" by 100%\",\n        \"Age Group\": \"\\\"35+\\\" by 100%\",\n        \"Ethnicity\": \"\\\"White - Irish\\\" by 81.98%\",\n        \"LEISURE Statements I worry about work during my leisure time\": \"\\\"Any Disagree\\\" by 43.5%\"\n    },\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, who appears relaxed and unworried about work during leisure, portraying balance in lifestyle, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A significant portion of the 'Sandra' audience does not worry about work during leisure, reflecting a level of work-life balance.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Give me an insight about the target audience's food supplement consumption",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": {\n        \"Sex\": \"\\\"All Women\\\" by 100%\",\n        \"Age Group\": \"\\\"35+\\\" by 100%\",\n        \"Ethnicity\": \"\\\"White - Irish\\\" by 81.98%\",\n        \"VITAMINS, COD LIVER OIL & OTHER SUPPLEMENTS  (including sports nutrition/supplements) Frequency\": \"\\\"Medium Users\\\" by 40.8%\"\n    },\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, surrounded by an array of food supplements such as vitamins and cod liver oil, portraying a moderate consumption lifestyle, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"40.8% of the 'Sandra' audience are medium users of vitamins, cod liver oil, and other supplements, indicating a balanced approach to maintaining health.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Regenerate the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": {\n        \"Sex\": \"\\\"All Women\\\" by 100%\",\n        \"Age Group\": \"\\\"35+\\\" by 100%\",\n        \"Ethnicity\": \"\\\"White - Irish\\\" by 81.98%\",\n        \"FOOD & DRINK PURCHASING/NUTRITION Types Enriched with Probiotics\": \"\\\"Occasionally\\\" by 35.08%\"\n    },\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, choosing food items enriched with probiotics, showcasing her occasional preference towards such nutrition, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"35.08% of the 'Sandra' audience occasionally buy food enriched with probiotics, suggesting a moderate interest in probiotic nutrition.\"\n}\n```",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": null,
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+        }
+    },
+    {
+        "type": "human",
+        "data": {
+            "content": "Rephrase the insight",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": null,
+            "example": false
+        }
+    },
+    {
+        "type": "ai",
+        "data": {
+            "content": "```json\n{\n    \"knowledge\": {\n        \"Sex\": \"\\\"All Women\\\" by 100%\",\n        \"Age Group\": \"\\\"35+\\\" by 100%\",\n        \"Ethnicity\": \"\\\"White - Irish\\\" by 81.98%\",\n        \"FOOD & DRINK PURCHASING/NUTRITION Types Enriched with Probiotics\": \"\\\"Occasionally\\\" by 35.08%\"\n    },\n    \"image_prompt\": \"Create a realistic portrait photography of a White - Irish woman over 35, choosing food items enriched with probiotics, showcasing her occasional preference towards such nutrition, shot with a Sigma 50mm f/1.8 lens, high ISO for low-light clarity.\",\n    \"insight\": \"A moderate segment, constituting 35.08% of the 'Sandra' demographic, exhibits an occasional inclination towards purchasing foods enriched with probiotics, reflecting a selective interest in probiotic-based nutrition.\"\n}\n```",
             "additional_kwargs": {},
             "response_metadata": {},
             "type": "ai",
